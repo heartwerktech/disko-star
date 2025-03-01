@@ -14,14 +14,18 @@
 git clone --recurse-submodules https://github.com/heartwerktech/disko-star.git
 ```
 
+
 ## Build
 - create files in data/
   - "ssid.txt" with wifi name
   - "pass.txt" with wifi password
-- select env (wemos_d1_mini32)
-- Build, Upload
-- Build Filesystem Image
-- Upload Filesystem Image 
+
+- select env (wemos_d1_mini32) (bootom bar platformio, where it says default)
+
+- In the sidebar find PlatformIO mantisalien:
+  - Build Filesystem Image
+  - Upload Filesystem Image 
+  - Upload and Monitor
 
 
 ## Resources
