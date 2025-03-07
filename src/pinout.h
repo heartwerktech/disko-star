@@ -10,8 +10,8 @@
 
 #define PIN_STEPPER_IN1 5 // pin5 	outputs PWM signal at boot, strapping pin dont use in future
 #define PIN_STEPPER_IN2 23
-#define PIN_STEPPER_IN3 19
-#define PIN_STEPPER_IN4 18
+#define PIN_STEPPER_IN3 18
+#define PIN_STEPPER_IN4 19
 
 #endif
 
