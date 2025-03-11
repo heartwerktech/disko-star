@@ -1,9 +1,9 @@
 #pragma once
 
-#define PIN_STEPPER_IN1 27
-#define PIN_STEPPER_IN2 25
-#define PIN_STEPPER_IN3 32
-#define PIN_STEPPER_IN4 12
+#define PIN_STEPPER_IN1 27 // green
+#define PIN_STEPPER_IN2 25 // black
+#define PIN_STEPPER_IN3 32 // blue
+#define PIN_STEPPER_IN4 12 // red
 
 #define PIN_MOTOR1_IN1 14
 #define PIN_MOTOR1_IN2 33
