@@ -160,8 +160,14 @@
           <input id='id_stepper_max_acceleration' class='slider' type='range'>
           <span id='id_stepper_max_acceleration_value' class="slider-value">-</span>
         </div>
+        <div class="slider-container">
+          <span class="slider-label">max position: </span>
+          <input id='id_max_stepper_position' class='slider' type='range'>
+          <span id='id_max_stepper_position_value' class="slider-value">-</span>
+        </div>
         <div class="separator"></div>
         <div class="separator"></div>
+
         
         <h2>Animation</h2>
         
@@ -218,6 +224,11 @@
       "id_stepper_max_acceleration": {
         "max": 3000,
         "value": 500
+      },
+      "id_max_stepper_position": {
+        "min": 2000,
+        "max": 3500,
+        "value": 2250
       },
       "id_rotation_animation_period": {
         "max": 100,
