@@ -13,7 +13,7 @@
 #define ENABLE_SERVER 1
 #define ENABLE_MQTT 0
 
-#define ENABLE_MOTOR 1
+#define ENABLE_MOTOR 0
 #define ENABLE_STEPPER 1
 
 #define ENABLE_LEDS 0
@@ -28,6 +28,13 @@
 #else
 #define MQTT_BROKER_IP "192.168.0.144" // mobile router:
 #endif
+
+// steps to change to mobile router
+// - change homeassistant mqtt broker in integration to above
+// - recompile disko-star repo to use different ip from above
+// - reconfigure wled to use correct ip
+
+
 
 #define MQTT_BROKER_PORT 1883
 

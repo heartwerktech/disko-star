@@ -27,7 +27,8 @@ public:
 
     // ==============================
     // constants / not changeable
-    static constexpr int max_stepper_position = 3036;
+    static constexpr int max_stepper_position = 3000;
+    // static constexpr int max_stepper_position = 3036;
     static constexpr int max_position_offset = 400;
 
     static constexpr int max_rotation_animation_period_s = 60 * 20;
