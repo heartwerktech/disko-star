@@ -7,7 +7,6 @@
 
 #define PIN_MOTOR1_IN1 23 
 #define PIN_MOTOR1_IN2 19
-
 #define PIN_MOTOR2_IN1 18 // not used
 #define PIN_MOTOR2_IN2 26 // not used
 
