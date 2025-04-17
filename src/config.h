@@ -11,9 +11,9 @@
 #define ENABLE_SERIAL 1
 
 #define ENABLE_SERVER 1
-#define ENABLE_MQTT 0
+#define ENABLE_MQTT 1
 
-#define ENABLE_MOTOR 0
+#define ENABLE_MOTOR 1
 #define ENABLE_STEPPER 1
 
 #define ENABLE_LEDS 0
