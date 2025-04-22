@@ -27,7 +27,8 @@ public:
 
     // ==============================
     // constants / not changeable
-    static constexpr int max_stepper_position = 3000;
+    CREATE_PARAMETER(max_stepper_position, 2250); // Range 2000-40000
+    // static constexpr int max_stepper_position = 3000;
     // static constexpr int max_stepper_position = 3036;
     static constexpr int max_position_offset = 400;
 
