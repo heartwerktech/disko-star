@@ -102,7 +102,7 @@ void loop()
 
 #if ENABLE_MOTOR
     if (pData->rotation_animation_period == 0)
-      motor.setSpeed(util::centerHysteris(util::mapConstrainf(pData->rotation, -100, 100, -1.0, 1.0), 0.05));
+      motor.setDirectly(util::centerHysteris(util::mapConstrainf(pData->rotation, -100, 100, -1.0, 1.0), 0.05));
 #endif
 
 #if ENABLE_STEPPER
