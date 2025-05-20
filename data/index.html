@@ -1,275 +1,267 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>LED Driver</title>
+    <!-- <link rel="icon" type="image/png" href="icon.png"> -->
+    <!-- <script src="chart.js"></script> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> -->
 
-<head>
-  <title>LED Driver</title>
-  <!-- <link rel="icon" type="image/png" href="icon.png"> -->
-  <!-- <script src="chart.js"></script> -->
-  <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> -->
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #181818;
+      }
 
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #181818;
-    }
+      .content {
+        font-family: "Inter", sans-serif;
+        background-color: #181818;
+        color: #eaeaea;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        text-align: center;
+      }
 
-    .content {
-      font-family: 'Inter', sans-serif;
-      background-color: #181818;
-      color: #EAEAEA;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      overflow-x: hidden;
-      text-align: center;
-    }
+      .slider-container {
+        display: flex;
+        align-items: center;
+        width: 90%;
+        max-width: 600px;
+        justify-content: space-between;
+        margin-bottom: 0px;
+        padding: 0px;
+      }
 
-    .slider-container {
-      display: flex;
-      align-items: center;
-      width: 90%;
-      max-width: 600px;
-      justify-content: space-between;
-      margin-bottom: 0px;
-      padding: 0px;
-    }
-
-    .slider-label {
-      font-weight: 700;
-      width: 120px;
-      text-align: right;
-      margin-left: 10px;
-    }
-
-    .slider {
-      width: 50%;
-      margin: 5px 0;
-      appearance: none;
-      outline: none;
-      background: #333;
-      height: 25px;
-      border-radius: 5px;
-      overflow: hidden;
-      flex-grow: 0.5;
-    }
-
-    .slider::-webkit-slider-thumb {
-      appearance: none;
-      width: 20px;
-      height: 40px;
-      background: white;
-      border-radius: 3px;
-      cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5), 0 3px 6px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-    }
-
-    .slider::-webkit-slider-runnable-track {
-      position: relative;
-    }
-
-    .slider::-webkit-slider-runnable-track::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: red;
-    }
-
-    .slider-value {
-      width: 80px;
-      text-align: right;
-      margin-right: 10px;
-    }
-
-    /* Responsive design adjustments for smaller screens */
-    @media only screen and (max-width: 480px) {
       .slider-label {
-        font-size: 14px;
-        width: 100px;
+        font-weight: 700;
+        width: 120px;
+        text-align: right;
+        margin-left: 10px;
+      }
+
+      .slider {
+        width: 50%;
+        margin: 5px 0;
+        appearance: none;
+        outline: none;
+        background: #333;
+        height: 25px;
+        border-radius: 5px;
+        overflow: hidden;
+        flex-grow: 0.5;
+      }
+
+      .slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 20px;
+        height: 40px;
+        background: white;
+        border-radius: 3px;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5), 0 3px 6px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+      }
+
+      .slider::-webkit-slider-runnable-track {
+        position: relative;
+      }
+
+      .slider::-webkit-slider-runnable-track::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: red;
       }
 
       .slider-value {
-        font-size: 14px;
-        width: 60px;
+        width: 80px;
+        text-align: right;
+        margin-right: 10px;
       }
-    }
 
-    .separator {
-      margin: 0 auto;
-      background-color: #444;
-      width: 90%;
-      height: 2px;
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-  </style>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="data:,">
-  <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-
-<body>
-  <div class="topnav">
-    <h1>LED Driver</h1>
-  </div>
-  <div class="content">
-    <div class="separator"></div>
-          
-        <div class="slider-container">
-          <span class="slider-label">Rotation Speed:</span>
-          <input id='id_rotation' class='slider' type='range'>
-          <span id='id_rotation_value' class="slider-value">-</span>
-        </div>
-
-        <div class="slider-container">
-          <span class="slider-label">Open-/-Close</span>
-          <input id='id_openess' class='slider' type='range'>
-          <span id='id_openess_value' class="slider-value">-</span>
-        </div>  
-
-
-        <div class="separator"></div>
-
-        <h2>Offset</h2>
-        
-        <div class="slider-container">
-          <span class="slider-label">Postion: </span>
-          <input id='id_position_offset' class='slider' type='range'>
-          <span id='id_position_offset_value' class="slider-value">-</span>
-        </div>
-
-        <div class="separator"></div>
-
-        <div class="separator"></div>
-
-        
-    
-    <div class="separator"></div>
-  </div>
-  <script>
-    const slidersConfig = {
-      "id_rotation": {
-        "min": -100,
-        "max": 100,
-        "value": 0
-      },
-      "id_openess": {
-        "min": 0,
-        "max": 100,
-        "value": 0
-      },
-      "id_position_offset": {
-        "min": -100,
-        "max": 100,
-        "value": 0
-      },
-    };
-
-    function initSliders() {
-      for (let id in slidersConfig) {
-
-        let slider = document.getElementById(id);
-        if (slider) {
-          slider.min = slidersConfig[id].hasOwnProperty('min') ? slidersConfig[id].min : 0;
-          slider.max = slidersConfig[id].max;
-          slider.value = slidersConfig[id].value;
-          slider.addEventListener("change", inputChanged);
-        } else {
-          console.error(`Slider with id ${id} not found.`);
+      /* Responsive design adjustments for smaller screens */
+      @media only screen and (max-width: 480px) {
+        .slider-label {
+          font-size: 14px;
+          width: 100px;
         }
 
+        .slider-value {
+          font-size: 14px;
+          width: 60px;
+        }
       }
-    }
 
-    var Socket;
+      .separator {
+        margin: 0 auto;
+        background-color: #444;
+        width: 90%;
+        height: 2px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
 
-    function init() {
-      initSliders();
-      Socket = new WebSocket("ws://" + window.location.hostname + ":81/");
-      Socket.onmessage = function (event) {
-        processCommand(event);
+  <body>
+    <div class="topnav">
+      <h1>LED Driver</h1>
+    </div>
+    <div class="content">
+      <div class="separator"></div>
+
+      <div class="slider-container">
+        <span class="slider-label">LED CH1:</span>
+        <input id="id_led_ch1" class="slider" type="range" />
+        <span id="id_led_ch1_value" class="slider-value">-</span>
+      </div>
+
+      <div class="slider-container">
+        <span class="slider-label">LED CH2:</span>
+        <input id="id_led_ch2" class="slider" type="range" />
+        <span id="id_led_ch2_value" class="slider-value">-</span>
+      </div>
+
+      <div class="slider-container">
+        <span class="slider-label">LED CH3:</span>
+        <input id="id_led_ch3" class="slider" type="range" />
+        <span id="id_led_ch3_value" class="slider-value">-</span>
+      </div>
+
+      <div class="slider-container">
+        <span class="slider-label">LED CH4:</span>
+        <input id="id_led_ch4" class="slider" type="range" />
+        <span id="id_led_ch4_value" class="slider-value">-</span>
+      </div>
+
+      <div class="separator"></div>
+    </div>
+    <script>
+      const slidersConfig = {
+        id_led_ch1: {
+          min: 0,
+          max: 100,
+          value: 0,
+        },
+        id_led_ch2: {
+          min: 0,
+          max: 100,
+          value: 0,
+        },
+        id_led_ch3: {
+          min: 0,
+          max: 100,
+          value: 0,
+        },
+        id_led_ch4: {
+          min: 0,
+          max: 100,
+          value: 0,
+        },
       };
-    }
 
-    function inputChanged(event) {
-      console.log("inputChanged");
-      console.log(event.target.id);
-      console.log(event.target.value);
-
-      const id = event.target.id;
-      const value = event.target.value;
-      // get msgName by removing "id_" from id in beginning
-      const msgName = id.substring(3);
-      var msg = { name: msgName, value: value };
-
-      if (Socket && Socket.readyState === WebSocket.OPEN) {
-        Socket.send(JSON.stringify(msg));
-      }
-    }
-
-    function processCommand(event) {
-      var obj = JSON.parse(event.data);
-      var name = obj.name;
-      
-      if (name) {
-        if (name.localeCompare("graph_amplitude") == 0) {
-          update_graph_amplitude(obj.value);
-        }
-      }
-
-      console.log("processCommand JSON obj:", obj);
-
-      // Check if the name matches one of our slider configurations
-      for (let id in slidersConfig) {
-
-        const msgName = id.substring(3);
-        if (name.localeCompare(msgName) == 0) {
-          let value = parseInt(obj.value);
-          console.log(value);
+      function initSliders() {
+        for (let id in slidersConfig) {
           let slider = document.getElementById(id);
-          slider.value = value;
-
-          // check if id does not contain "_control_"
-          if (id.indexOf("ratio") != -1) {
-            let output = document.getElementById(id + '_value');
-            output.innerHTML = value + " %";
+          if (slider) {
+            slider.min = slidersConfig[id].hasOwnProperty("min")
+              ? slidersConfig[id].min
+              : 0;
+            slider.max = slidersConfig[id].max;
+            slider.value = slidersConfig[id].value;
+            slider.addEventListener("change", inputChanged);
+          } else {
+            console.error(`Slider with id ${id} not found.`);
           }
-          else if (id.indexOf("percent") != -1) {
-            let output = document.getElementById(id + '_value');
-            output.innerHTML = value + " %";
-          }
-          else if (id.indexOf("period_s") != -1) {
-            let output = document.getElementById(id + '_value');
-            output.innerHTML = ((value / 100) * 10).toFixed(2) + " s"; // MAX_PERIOD_S = 10
-          }
-          else if (id.indexOf("_s") != -1) {
-            let output = document.getElementById(id + '_value');
-            output.innerHTML = value + " s";
-          }
-          else if (id.indexOf("_Hz") != -1) {
-            let output = document.getElementById(id + '_value');
-            output.innerHTML = value + " Hz";
-          }
-          else {
-            let output = document.getElementById(id + '_value');
-            output.innerHTML = value;
-          }
-          return; // Exit after handling
         }
       }
-    }
 
-    window.onload = function (event) {
-      init();
-    };
-  </script>
-</body>
+      var Socket;
 
+      function init() {
+        initSliders();
+        Socket = new WebSocket("ws://" + window.location.hostname + ":81/");
+        Socket.onmessage = function (event) {
+          processCommand(event);
+        };
+      }
+
+      function inputChanged(event) {
+        console.log("inputChanged");
+        console.log(event.target.id);
+        console.log(event.target.value);
+
+        const id = event.target.id;
+        const value = event.target.value;
+        // get msgName by removing "id_" from id in beginning
+        const msgName = id.substring(3);
+        var msg = { name: msgName, value: value };
+
+        if (Socket && Socket.readyState === WebSocket.OPEN) {
+          Socket.send(JSON.stringify(msg));
+        }
+      }
+
+      function processCommand(event) {
+        var obj = JSON.parse(event.data);
+        var name = obj.name;
+
+        if (name) {
+          if (name.localeCompare("graph_amplitude") == 0) {
+            update_graph_amplitude(obj.value);
+          }
+        }
+
+        console.log("processCommand JSON obj:", obj);
+
+        // Check if the name matches one of our slider configurations
+        for (let id in slidersConfig) {
+          const msgName = id.substring(3);
+          if (name.localeCompare(msgName) == 0) {
+            let value = parseInt(obj.value);
+            console.log(value);
+            let slider = document.getElementById(id);
+            slider.value = value;
+
+            // check if id does not contain "_control_"
+            if (id.indexOf("ratio") != -1) {
+              let output = document.getElementById(id + "_value");
+              output.innerHTML = value + " %";
+            } else if (id.indexOf("percent") != -1) {
+              let output = document.getElementById(id + "_value");
+              output.innerHTML = value + " %";
+            } else if (id.indexOf("period_s") != -1) {
+              let output = document.getElementById(id + "_value");
+              output.innerHTML = ((value / 100) * 10).toFixed(2) + " s"; // MAX_PERIOD_S = 10
+            } else if (id.indexOf("_s") != -1) {
+              let output = document.getElementById(id + "_value");
+              output.innerHTML = value + " s";
+            } else if (id.indexOf("_Hz") != -1) {
+              let output = document.getElementById(id + "_value");
+              output.innerHTML = value + " Hz";
+            } else {
+              let output = document.getElementById(id + "_value");
+              output.innerHTML = value;
+            }
+            return; // Exit after handling
+          }
+        }
+      }
+
+      window.onload = function (event) {
+        init();
+      };
+    </script>
+  </body>
 </html>

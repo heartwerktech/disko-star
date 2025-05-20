@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <ArduinoOTA.h>
+#include <vector>
 
 #include "config.h"
 #include "pinout.h"
@@ -8,6 +9,10 @@
 
 #if ENABLE_LED_CHAIN
 #include "led_matrix.h"
+#endif
+
+#if ENABLE_LED_DRIVER
+#include "LedDriver.h"
 #endif
 
 #if ENABLE_SERVER
@@ -30,13 +35,26 @@ H_Bridge_Driver motor(PIN_MOTOR1_IN1, PIN_MOTOR1_IN2);
 LedMatrix matrix(PIN_LED_MATRIX, 8 * 4, 8); // PIN=5, width=32, height=8
 #endif
 
-
+#if ENABLE_LED_DRIVER
+// vector of led drivers
+std::vector<LedDriver> led_channels = {
+    LedDriver(PIN_LED_CH_1),
+    LedDriver(PIN_LED_CH_2),
+    LedDriver(PIN_LED_CH_3),
+    LedDriver(PIN_LED_CH_4)
+};
+#endif
 
 void setup()
 {
 #if ENABLE_LED_CHAIN
     matrix.init();
     matrix.showText("DISKO!", matrix.Color(255, 255, 255));
+#endif
+
+#if ENABLE_LED_DRIVER
+    for (auto &led : led_channels)
+        led.setup();
 #endif
 
 #if ENABLE_MOTOR
@@ -75,6 +93,11 @@ void loop()
     matrix.loop();
 #endif
 
+#if ENABLE_LED_DRIVER
+    for (auto &led : led_channels)
+        led.loop();
+#endif
+
     ArduinoOTA.handle();
 
 #if ENABLE_SERVER
@@ -86,14 +109,10 @@ void loop()
 
     if (pData->wasUpdated())
     {
-
-#if ENABLE_MOTOR
-        if (pData->rotation_animation_period == 0)
-            motor.setSpeed(
-                util::centerHysteris(util::mapConstrainf(pData->rotation, -100, 100, -1.0, 1.0),
-                                     0.05));
+#if ENABLE_LED_DRIVER 
+        for (int i = 0; i < led_channels.size(); i++)
+            led_channels[i].set(pData->led_channels[i]->value);
 #endif
-
 #if ENABLE_MQTT
         mqtt.sendAll();
 #endif

@@ -7,10 +7,10 @@
 #define PIN_MOTOR2_IN2 35 // not used
 
 // on led-driver pcb:
-#define PIN_LED_CHANNEL_1 D5
-#define PIN_LED_CHANNEL_2 D3
-#define PIN_LED_CHANNEL_3 D4
-#define PIN_LED_CHANNEL_4 D6
+#define PIN_LED_CH_1 D5
+#define PIN_LED_CH_2 D3
+#define PIN_LED_CH_3 D4
+#define PIN_LED_CH_4 D6
 
 #define PIN_LED_MATRIX 5 // pin5 	outputs PWM signal at boot, strapping pin dont use in future
 

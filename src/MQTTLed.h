@@ -15,10 +15,10 @@ public:
         : MQTT(MQTT_BROKER_IP, MQTT_BROKER_PORT)
     {
         // addComponent("sensor", "rotation");
-        addComponent("light", "light_ch1");
-        addComponent("light", "light_ch2");
-        addComponent("light", "light_ch3");
-        addComponent("light", "light_ch4");
+        addComponent("light", "led_ch1");
+        addComponent("light", "led_ch2");
+        addComponent("light", "led_ch3");
+        addComponent("light", "led_ch4");
     }
 
     void setup()
@@ -39,23 +39,23 @@ public:
             printf("LightChangeCallback: %s, %f\n", component_name.c_str(), percent);
             bool changed = false;
 
-            // check if component_name contains "light_ch"
-            if (component_name.startsWith("light_ch"))
+            // check if component_name contains "led_ch"
+            if (component_name.startsWith("led_ch"))
             {
                 int ch = component_name.substring(9).toInt();
                 switch (ch)
                 {
                     case 1:
-                        pData->light_ch1.value = percent;
+                        pData->led_ch1.value = percent;
                         break;
                     case 2:
-                        pData->light_ch2.value = percent;
+                        pData->led_ch2.value = percent;
                         break;
                     case 3:
-                        pData->light_ch3.value = percent;
+                        pData->led_ch3.value = percent;
                         break;
                     case 4:
-                        pData->light_ch4.value = percent;
+                        pData->led_ch4.value = percent;
                         break;
                 }
                 changed = true;
@@ -72,10 +72,10 @@ public:
     void sendAll()
     {
         printf("Sending ALL MQTT\n");
-        send(pData->light_ch1);
-        send(pData->light_ch2);
-        send(pData->light_ch3);
-        send(pData->light_ch4);
+        send(pData->led_ch1);
+        send(pData->led_ch2);
+        send(pData->led_ch3);
+        send(pData->led_ch4);
     }
 
     void send(ParameterData::Parameter& param) { sendLight(param.name, param.value); }
