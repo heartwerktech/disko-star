@@ -8,10 +8,10 @@
 #include "motor/h_bridge_driver.h"
 #include "motor/stepper_driver.h"
 
-class MQTT_Diskostar : public MQTT
+class MQTTLed : public MQTT
 {
 public:
-    MQTT_Diskostar() : MQTT(MQTT_BROKER_IP, MQTT_BROKER_PORT)
+    MQTTLed() : MQTT(MQTT_BROKER_IP, MQTT_BROKER_PORT)
     {
         // addComponent("sensor", "rotation");
         // addComponent("sensor", "position");

@@ -17,8 +17,8 @@ DataLed *pData = nullptr;
 #endif
 
 #if ENABLE_MQTT
-#include "mqtt_diskostar.h"
-MQTT_Diskostar mqtt;
+#include "MQTTLed.h"
+MQTTLed mqtt;
 #endif
 
 #if ENABLE_MOTOR
