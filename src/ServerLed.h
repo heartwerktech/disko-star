@@ -5,14 +5,14 @@
 
 #include "config.h"
 
-#include "DataLed.h"
+#include "ServerDataLed.h"
 
 void webSocketEvent(byte num, WStype_t ws_type, uint8_t *payload, size_t length);
 
 class ServerLed : public ParameterServer
 {
 public:
-  DataLed data;
+  ServerDataLed data;
 
 public:
   ServerLed() : ParameterServer() { ParameterServer::pData = &data; }
@@ -22,7 +22,7 @@ public:
 
     const char *name = DEVICE_NAME;
     // if (!MDNS.begin(name))
-    if (!MDNS.begin("disko-star"))
+    if (!MDNS.begin("led-driver"))
       Serial.println("Error setting up mDNS responder!");
     else
       Serial.printf("mDNS responder started: http://%s.local\n", DEVICE_NAME);

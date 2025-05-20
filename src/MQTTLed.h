@@ -2,27 +2,23 @@
 
 #include "config.h"
 #include "interface/mqtt.h"
-#include "DataLed.h"
 
+#include "ServerDataLed.h"
 #include "ServerLed.h"
+
 #include "motor/h_bridge_driver.h"
-#include "motor/stepper_driver.h"
 
 class MQTTLed : public MQTT
 {
 public:
-    MQTTLed() : MQTT(MQTT_BROKER_IP, MQTT_BROKER_PORT)
+    MQTTLed()
+        : MQTT(MQTT_BROKER_IP, MQTT_BROKER_PORT)
     {
         // addComponent("sensor", "rotation");
-        // addComponent("sensor", "position");
-        // addComponent("switch", "relay");
-        addComponent("light", "rotation_CW");
-        addComponent("light", "rotation_CCW");
-        addComponent("light", "rotation_animation_period");
-        addComponent("light", "rotation_animation_amplitude");
-        addComponent("light", "position");
-        addComponent("light", "position_animation_period");
-        addComponent("light", "position_animation_amplitude");
+        addComponent("light", "light_ch1");
+        addComponent("light", "light_ch2");
+        addComponent("light", "light_ch3");
+        addComponent("light", "light_ch4");
     }
 
     void setup()
@@ -33,120 +29,55 @@ public:
         MQTT::setup();
     }
 
-    void setRXCallback(
-        DataLed *pData,
-        ServerLed &server,
-        H_Bridge_Driver &motor,
-        Stepper_Driver &stepper)
+    void setRXCallback(ServerDataLed*   pData,
+                       ServerLed&       server)
     {
         if (!_isActive)
             return;
 
-        setLightChangeCallback([this,
-                                pData,
-                                &server,
-                                &motor,
-                                &stepper](
-                                   const String &component_name,
-                                   float percent)
-                               { 
-      printf("LightChangeCallback: %s, %f\n", component_name.c_str(), percent);
-      bool changed = false;
+        setLightChangeCallback([this, pData, &server](const String& component_name, float percent) {
+            printf("LightChangeCallback: %s, %f\n", component_name.c_str(), percent);
+            bool changed = false;
 
-      if (component_name == "rotation_CW")
-      {
-        pData->rotation_animation_period = 0;
-        send(pData->rotation_animation_period);
+            // check if component_name contains "light_ch"
+            if (component_name.startsWith("light_ch"))
+            {
+                int ch = component_name.substring(9).toInt();
+                switch (ch)
+                {
+                    case 1:
+                        pData->light_ch1.value = percent;
+                        break;
+                    case 2:
+                        pData->light_ch2.value = percent;
+                        break;
+                    case 3:
+                        pData->light_ch3.value = percent;
+                        break;
+                    case 4:
+                        pData->light_ch4.value = percent;
+                        break;
+                }
+                changed = true;
+            }
 
-        pData->rotation = util::mapConstrainf(percent, 0, 1, 0, 100);
-#if ENABLE_MOTOR
-        motor.setSpeed(util::centerHysteris(util::mapConstrainf(pData->rotation, -100, 100, -1.0, 1.0), 0.05));
-#endif
-        changed = true;
-      }
-      else if (component_name == "rotation_CCW")
-      {
-        pData->rotation_animation_period = 0;
-        send(pData->rotation_animation_period);
-        pData->rotation = util::mapConstrainf(percent, 0, 1, 0, -100);
-
-#if ENABLE_MOTOR
-        motor.setSpeed(util::centerHysteris(util::mapConstrainf(pData->rotation, -100, 100, -1.0, 1.0), 0.05));
-#endif
-        changed = true;
-      }
-      else if (component_name == "rotation_animation_period")
-      {
-        pData->rotation_animation_period = util::mapConstrainf(percent, 0, 1, 0, 100);
-        changed = true;
-      }
-      else if (component_name == "rotation_animation_amplitude")
-      {
-        pData->rotation_animation_amplitude = util::mapConstrainf(percent, 0, 1, 0, 100);
-        changed = true;
-      }
-      else if (component_name == "position")
-      {
-        pData->openess = util::mapConstrainf(percent, 0, 1, 0, 100);
-
-#if ENABLE_STEPPER
-        stepper.set(util::mapConstrainf(pData->openess, 0, 100, 0, pData->max_stepper_position));
-#endif
-        changed = true;
-      }
-      else if (component_name == "position_animation_period")
-      {
-        pData->position_animation_period = util::mapConstrainf(percent, 0, 1, 0, 100);
-        changed = true;
-      }
-      else if (component_name == "position_animation_amplitude")
-      {
-        pData->position_animation_amplitude = util::mapConstrainf(percent, 0, 1, 0, 100);
-        changed = true;
-      }
-
-      if (changed)
-      {
-        pData->save();
-        server.sendAllParameters();
-      } });
+            if (changed)
+            {
+                pData->save();
+                server.sendAllParameters();
+            }
+        });
     }
 
     void sendAll()
     {
         printf("Sending ALL MQTT\n");
-        send_rotation(pData);
-        send(pData->openess);
-        send(pData->rotation_animation_period);
-        send(pData->rotation_animation_amplitude);
-        send(pData->position_animation_period);
-        send(pData->position_animation_amplitude);
+        send(pData->light_ch1);
+        send(pData->light_ch2);
+        send(pData->light_ch3);
+        send(pData->light_ch4);
     }
 
-    void send(ParameterData::Parameter &param)
-    {
-        sendLight(param.name, param.value);
-    }
+    void send(ParameterData::Parameter& param) { sendLight(param.name, param.value); }
 
-    // helper bc only unipolar values for now.
-    void send_rotation(DataLed *pData)
-    {
-        float old_rotation = NAN;
-
-        if (old_rotation != pData->rotation.value)
-        {
-            old_rotation = pData->rotation.value;
-
-            if (pData->rotation >= 0)
-            {
-                sendLight("rotation_CW", pData->rotation.value);
-                sendLight("rotation_CCW", 0);
-            }
-            else
-            {
-                sendLight("rotation_CCW", -pData->rotation.value);
-                sendLight("rotation_CW", 0);
-            }
-        }
-    }
 };

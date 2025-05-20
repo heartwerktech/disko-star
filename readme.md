@@ -1,4 +1,4 @@
-# heartwerktech/disko-star
+# heartwerktech/esp32-generic-controller
 
 - this project is released under GPLv3!
 
@@ -11,7 +11,7 @@
 - checkout repository:
 
 ```
-git clone --recurse-submodules https://github.com/heartwerktech/disko-star.git
+git clone --recurse-submodules https://github.com/heartwerktech/esp32-generic-controller.git
 ```
 
 ## Build
@@ -26,50 +26,3 @@ git clone --recurse-submodules https://github.com/heartwerktech/disko-star.git
 
 ## FAQ / common problems
 - make sure to have high enough current supply, otherwise MCU resets.
-
-
-
-## Resources
-
-- [Bill of Material](https://docs.google.com/spreadsheets/d/1WuYzduE2HkZthLLmO-JZaNuw8-il5M_H4LjsfEWBu10/edit?usp=sharing)
-
-- [Canva presentation](https://www.canva.com/design/DAGc09UFvwc/3iI4gSQLW8nrND8pjCcayQ/edit?utm_content=DAGc09UFvwc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
-
-# TODOS - first big prototype
-- [ ] **Order Parts**
-  - Screws  
-  - Steel wire  
-  - LEDs  
-
-- [ ] **Glue Mirrors** on outer part
-
-- [ ] **Mechanical Design**
-  - Redesign top mount (Markus Weiss)
-  - Finalize bill of materials
-  - Design stepper motor mount (figure out attachment of stepper motor)
-  - Design lead screw mount
-  - Assemble Disko Star
-
-- [ ] **Software + PCB**
-  - Test PCB with software and motors
-
-- [ ] **LEDs / Light Design**
-  - Decide on firmware
-
-- [ ] **Documentation**
-  - Make 3D files publicly available
-  - Write documentation of PCBs and software
-
-
-
-
-
-- more Documentation lol
-
-- documentation about env and how to do that !!
-
-
-## NEXT STEPS
-
-- bracket metal/3d printed for mounting stepper
-- dave documents how plastic parts were cut.

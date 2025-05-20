@@ -1,16 +1,16 @@
 #pragma once
 
-#define PIN_STEPPER_IN1 27 // green
-#define PIN_STEPPER_IN2 25 // black
-#define PIN_STEPPER_IN3 32 // blue
-#define PIN_STEPPER_IN4 12 // red // TODO: fix this is strapping pin
-
 #define PIN_MOTOR1_IN1 14
 #define PIN_MOTOR1_IN2 33
 
 #define PIN_MOTOR2_IN1 34 // not used
 #define PIN_MOTOR2_IN2 35 // not used
 
+// on led-driver pcb:
+#define PIN_LED_CHANNEL_1 D5
+#define PIN_LED_CHANNEL_2 D3
+#define PIN_LED_CHANNEL_3 D4
+#define PIN_LED_CHANNEL_4 D6
 
 #define PIN_LED_MATRIX 5 // pin5 	outputs PWM signal at boot, strapping pin dont use in future
 

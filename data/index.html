@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Diskostar</title>
+  <title>LED Driver</title>
   <!-- <link rel="icon" type="image/png" href="icon.png"> -->
   <!-- <script src="chart.js"></script> -->
   <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> -->
@@ -117,7 +117,7 @@
 
 <body>
   <div class="topnav">
-    <h1>Diskostar</h1>
+    <h1>LED Driver</h1>
   </div>
   <div class="content">
     <div class="separator"></div>
@@ -147,55 +147,9 @@
 
         <div class="separator"></div>
 
-        <h2>General Stepper</h2>
-    
-        <div class="slider-container">
-          <span class="slider-label">Speed: </span>
-          <input id='id_stepper_max_speed' class='slider' type='range'>
-          <span id='id_stepper_max_speed_value' class="slider-value">-</span>
-        </div>
-    
-        <div class="slider-container">
-          <span class="slider-label">Acceleration: </span>
-          <input id='id_stepper_max_acceleration' class='slider' type='range'>
-          <span id='id_stepper_max_acceleration_value' class="slider-value">-</span>
-        </div>
-        <div class="slider-container">
-          <span class="slider-label">max position: </span>
-          <input id='id_max_stepper_position' class='slider' type='range'>
-          <span id='id_max_stepper_position_value' class="slider-value">-</span>
-        </div>
-        <div class="separator"></div>
         <div class="separator"></div>
 
         
-        <h2>Animation</h2>
-        
-        <div class="slider-container">
-          <span class="slider-label">Rot Period:  (max 20min)</span>
-          <input id='id_rotation_animation_period' class='slider' type='range'>
-          <span id='id_rotation_animation_period_value' class="slider-value">-</span>
-        </div>
-
-        <div class="slider-container">
-          <span class="slider-label">Rot Amplitude: </span>
-          <input id='id_rotation_animation_amplitude' class='slider' type='range'>
-          <span id='id_rotation_animation_amplitude_value' class="slider-value">-</span>
-        </div>
-        
-        <div class="separator"></div>
-
-        <div class="slider-container">
-          <span class="slider-label">Pos Period: (max 2min)</span>
-          <input id='id_position_animation_period' class='slider' type='range'>
-          <span id='id_position_animation_period_value' class="slider-value">-</span>
-        </div>
-        
-        <div class="slider-container">
-          <span class="slider-label">Pos Amplitude: </span>
-          <input id='id_position_animation_amplitude' class='slider' type='range'>
-          <span id='id_position_animation_amplitude_value' class="slider-value">-</span>
-        </div>
     
     <div class="separator"></div>
   </div>
@@ -211,38 +165,8 @@
         "max": 100,
         "value": 0
       },
-
       "id_position_offset": {
         "min": -100,
-        "max": 100,
-        "value": 0
-      },
-      "id_stepper_max_speed": {
-        "max": 3000,
-        "value": 500
-      },
-      "id_stepper_max_acceleration": {
-        "max": 3000,
-        "value": 500
-      },
-      "id_max_stepper_position": {
-        "min": 2000,
-        "max": 3500,
-        "value": 2250
-      },
-      "id_rotation_animation_period": {
-        "max": 100,
-        "value": 0
-      },
-      "id_position_animation_period": {
-        "max": 100,
-        "value": 0
-      },
-      "id_rotation_animation_amplitude": {
-        "max": 100,
-        "value": 0
-      },
-      "id_position_animation_amplitude": {
         "max": 100,
         "value": 0
       },
