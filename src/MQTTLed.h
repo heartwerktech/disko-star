@@ -4,7 +4,12 @@
 #include "interface/mqtt.h"
 
 #include "ServerDataLed.h"
+#if ENABLE_SERVER
 #include "ServerLed.h"
+#else
+#include <WiFiManager.h>
+#include <ESP8266WiFi.h>
+#endif
 
 #include "motor/h_bridge_driver.h"
 
@@ -23,11 +28,17 @@ public:
 
     void setup()
     {
-        if (!isRechableAndActive())
+        if (!isRechableAndActive()){
+            printf("MQTT not reachable at: %s:%d\n", MQTT_BROKER_IP, MQTT_BROKER_PORT);
             return;
+        }
+        else
+            printf("Connecting to MQTT Server\n");
 
         MQTT::setup();
     }
+
+    #if ENABLE_SERVER
 
     void setRXCallback(ServerDataLed* pData, ServerLed& server)
     {
@@ -64,6 +75,46 @@ public:
             {
                 pData->save();
                 server.sendAllParameters();
+            }
+        });
+    }
+    #endif
+
+
+    void setRXCallback(ServerDataLed* pData)
+    {
+        if (!_isActive)
+            return;
+
+        setLightChangeCallback([this, pData](const String& component_name, float percent) {
+            printf("LightChangeCallback: %s, %f\n", component_name.c_str(), percent);
+            bool changed = false;
+
+            // check if component_name contains "led_ch"
+            if (component_name.startsWith("led_ch"))
+            {
+                int ch = component_name.substring(9).toInt();
+                switch (ch)
+                {
+                case 1:
+                    pData->led_ch1.value = percent;
+                    break;
+                case 2:
+                    pData->led_ch2.value = percent;
+                    break;
+                case 3:
+                    pData->led_ch3.value = percent;
+                    break;
+                case 4:
+                    pData->led_ch4.value = percent;
+                    break;
+                }
+                changed = true;
+            }
+
+            if (changed)
+            {
+                pData->save();
             }
         });
     }

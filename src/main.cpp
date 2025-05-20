@@ -71,12 +71,33 @@ void setup()
 #if ENABLE_SERVER
     server.setup();
     pData = &server.data;
+#elif ENABLE_WIFIMANAGER
+    WiFi.mode(WIFI_STA);
+    WiFiManager wm;     // wm.setDebugOutput(false);
+    wm.setTimeout(180); // 3 minutes
+#if RESET_WIFI_CREDENTIALS
+    wm.resetSettings(); // reset settings
+#endif
+
+    String hotspot = String("AP: ") + String(DEVICE_NAME);
+    if (!wm.autoConnect(hotspot.c_str()))
+        Serial.println("Failed to connect WIFI :-/");
+
+    Serial.println(String("MAC: ") + String(WiFi.macAddress()));
+    
+    Serial.println("Connected to WIFI: " + WiFi.SSID());
+    Serial.println("====================================");
+
 #endif
 
 #if ENABLE_MQTT
-
+    Serial.printf("mqtt.setup()\n");
     mqtt.setup();
+#if ENABLE_SERVER
     mqtt.setRXCallback(pData, server);
+#else
+    mqtt.setRXCallback(pData);
+#endif
 #endif
 
     ArduinoOTA.begin();

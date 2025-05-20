@@ -11,6 +11,8 @@
 #define ENABLE_SERIAL 1
 
 #define ENABLE_SERVER 0
+#define ENABLE_WIFIMANAGER 1
+#define RESET_WIFI_CREDENTIALS 0
 #define ENABLE_MQTT 1
 
 #define ENABLE_MOTOR 0
@@ -21,11 +23,12 @@
 
 #if ENABLE_MQTT
 
-#if 1
-#define MQTT_BROKER_IP "192.168.178.41" // @ Home
-#else
-#define MQTT_BROKER_IP "192.168.0.144" // mobile router:
-#endif
+#define MQTT_BROKER_IP "10.17.250.215"
+// #if 1
+// #define MQTT_BROKER_IP "192.168.178.41" // @ Home
+// #else
+// #define MQTT_BROKER_IP "192.168.0.144" // mobile router:
+// #endif
 
 // steps to change to mobile router
 // - change homeassistant mqtt broker in integration to above
