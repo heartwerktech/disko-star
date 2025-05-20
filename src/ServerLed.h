@@ -1,5 +1,6 @@
 #pragma once
 
+#if ENABLE_SERVER
 #include "server/parameter_server.h"
 #include "server/graphs_helper.h"
 
@@ -22,7 +23,7 @@ public:
 
     const char *name = DEVICE_NAME;
     // if (!MDNS.begin(name))
-    if (!MDNS.begin("led-driver"))
+    if (!MDNS.begin("led-note-02"))
       Serial.println("Error setting up mDNS responder!");
     else
       Serial.printf("mDNS responder started: http://%s.local\n", DEVICE_NAME);
@@ -77,3 +78,5 @@ void webSocketEvent(byte num, WStype_t ws_type, uint8_t *payload, size_t length)
   }
   }
 }
+
+#endif

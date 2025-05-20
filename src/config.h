@@ -5,14 +5,14 @@
 
 #include "util.h"
 
-#define DEVICE_NAME "led-driver"
+#define DEVICE_NAME "led-note-02"
 
 // ================== FEATURES ====================
 #define ENABLE_SERIAL 1
 
 #define ENABLE_SERVER 0
 #define ENABLE_WIFIMANAGER 1
-#define RESET_WIFI_CREDENTIALS 0
+#define RESET_WIFI_CREDENTIALS 0 // enable only temprarily
 #define ENABLE_MQTT 1
 
 #define ENABLE_MOTOR 0
@@ -23,12 +23,12 @@
 
 #if ENABLE_MQTT
 
-#define MQTT_BROKER_IP "10.17.250.215"
-// #if 1
-// #define MQTT_BROKER_IP "192.168.178.41" // @ Home
-// #else
-// #define MQTT_BROKER_IP "192.168.0.144" // mobile router:
-// #endif
+#if 1
+#define MQTT_BROKER_IP "192.168.178.41" // @ Home
+// #define MQTT_BROKER_IP "10.17.250.215" // locally hosted @fablab
+#else
+#define MQTT_BROKER_IP "192.168.0.144" // mobile router:
+#endif
 
 // steps to change to mobile router
 // - change homeassistant mqtt broker in integration to above

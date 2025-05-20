@@ -40,11 +40,10 @@ LedMatrix matrix(PIN_LED_MATRIX, 8 * 4, 8); // PIN=5, width=32, height=8
 #endif
 
 #if ENABLE_LED_DRIVER
-// vector of led drivers
-std::vector<LedDriver> led_channels = {LedDriver(PIN_LED_CH_1),
-                                       LedDriver(PIN_LED_CH_2),
-                                       LedDriver(PIN_LED_CH_3),
-                                       LedDriver(PIN_LED_CH_4)};
+LedDrivers led_drivers = {LedDriver(PIN_LED_CH_1),
+                          LedDriver(PIN_LED_CH_2),
+                          LedDriver(PIN_LED_CH_3),
+                          LedDriver(PIN_LED_CH_4)};
 #endif
 
 void setup()
@@ -55,7 +54,7 @@ void setup()
 #endif
 
 #if ENABLE_LED_DRIVER
-    for (auto& led : led_channels)
+    for (auto& led : led_drivers)
         led.setup();
 #endif
 
@@ -84,7 +83,7 @@ void setup()
         Serial.println("Failed to connect WIFI :-/");
 
     Serial.println(String("MAC: ") + String(WiFi.macAddress()));
-    
+
     Serial.println("Connected to WIFI: " + WiFi.SSID());
     Serial.println("====================================");
 
@@ -96,7 +95,7 @@ void setup()
 #if ENABLE_SERVER
     mqtt.setRXCallback(pData, server);
 #else
-    mqtt.setRXCallback(pData);
+    mqtt.setRXCallback(led_drivers);
 #endif
 #endif
 
@@ -117,24 +116,24 @@ void loop()
 #endif
 
 #if ENABLE_LED_DRIVER
-    for (auto& led : led_channels)
+    for (auto& led : led_drivers)
         led.loop();
 #endif
 
     ArduinoOTA.handle();
 
-#if ENABLE_SERVER
-    server.loop();
-
 #if ENABLE_MQTT
     mqtt.loop();
 #endif
 
+#if ENABLE_SERVER
+    server.loop();
+
     if (pData->wasUpdated())
     {
 #if ENABLE_LED_DRIVER
-        for (int i = 0; i < led_channels.size(); i++)
-            led_channels[i].set(pData->led_channels[i]->value);
+        for (int i = 0; i < led_drivers.size(); i++)
+            led_drivers[i].set(pData->led_drivers[i]->value);
 #endif
 #if ENABLE_MQTT
         mqtt.sendAll();
