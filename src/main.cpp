@@ -24,6 +24,10 @@ ServerDataLed*   pData = nullptr;
 #if ENABLE_MQTT
 #include "MQTTLed.h"
 MQTTLed mqtt;
+
+#if !ENABLE_SERVER
+ServerDataLed* pData = new ServerDataLed();
+#endif
 #endif
 
 #if ENABLE_MOTOR
@@ -37,12 +41,10 @@ LedMatrix matrix(PIN_LED_MATRIX, 8 * 4, 8); // PIN=5, width=32, height=8
 
 #if ENABLE_LED_DRIVER
 // vector of led drivers
-std::vector<LedDriver> led_channels = {
-    LedDriver(PIN_LED_CH_1),
-    LedDriver(PIN_LED_CH_2),
-    LedDriver(PIN_LED_CH_3),
-    LedDriver(PIN_LED_CH_4)
-};
+std::vector<LedDriver> led_channels = {LedDriver(PIN_LED_CH_1),
+                                       LedDriver(PIN_LED_CH_2),
+                                       LedDriver(PIN_LED_CH_3),
+                                       LedDriver(PIN_LED_CH_4)};
 #endif
 
 void setup()
@@ -53,14 +55,13 @@ void setup()
 #endif
 
 #if ENABLE_LED_DRIVER
-    for (auto &led : led_channels)
+    for (auto& led : led_channels)
         led.setup();
 #endif
 
 #if ENABLE_MOTOR
     motor.setup();
 #endif
-
 
 #if ENABLE_SERIAL
     Serial.begin(SERIAL_BAUD_RATE);
@@ -73,6 +74,7 @@ void setup()
 #endif
 
 #if ENABLE_MQTT
+
     mqtt.setup();
     mqtt.setRXCallback(pData, server);
 #endif
@@ -94,7 +96,7 @@ void loop()
 #endif
 
 #if ENABLE_LED_DRIVER
-    for (auto &led : led_channels)
+    for (auto& led : led_channels)
         led.loop();
 #endif
 
@@ -109,7 +111,7 @@ void loop()
 
     if (pData->wasUpdated())
     {
-#if ENABLE_LED_DRIVER 
+#if ENABLE_LED_DRIVER
         for (int i = 0; i < led_channels.size(); i++)
             led_channels[i].set(pData->led_channels[i]->value);
 #endif

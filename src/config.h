@@ -10,13 +10,12 @@
 // ================== FEATURES ====================
 #define ENABLE_SERIAL 1
 
-#define ENABLE_SERVER 1
+#define ENABLE_SERVER 0
 #define ENABLE_MQTT 1
 
 #define ENABLE_MOTOR 0
 #define ENABLE_LED_CHAIN 0
 #define ENABLE_LED_DRIVER 1
-
 
 // ================== Settings ====================
 
@@ -32,7 +31,6 @@
 // - change homeassistant mqtt broker in integration to above
 // - recompile disko-star repo to use different ip from above
 // - reconfigure wled to use correct ip
-
 
 #define MQTT_BROKER_PORT 1883
 

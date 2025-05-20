@@ -29,8 +29,7 @@ public:
         MQTT::setup();
     }
 
-    void setRXCallback(ServerDataLed*   pData,
-                       ServerLed&       server)
+    void setRXCallback(ServerDataLed* pData, ServerLed& server)
     {
         if (!_isActive)
             return;
@@ -45,18 +44,18 @@ public:
                 int ch = component_name.substring(9).toInt();
                 switch (ch)
                 {
-                    case 1:
-                        pData->led_ch1.value = percent;
-                        break;
-                    case 2:
-                        pData->led_ch2.value = percent;
-                        break;
-                    case 3:
-                        pData->led_ch3.value = percent;
-                        break;
-                    case 4:
-                        pData->led_ch4.value = percent;
-                        break;
+                case 1:
+                    pData->led_ch1.value = percent;
+                    break;
+                case 2:
+                    pData->led_ch2.value = percent;
+                    break;
+                case 3:
+                    pData->led_ch3.value = percent;
+                    break;
+                case 4:
+                    pData->led_ch4.value = percent;
+                    break;
                 }
                 changed = true;
             }
@@ -69,6 +68,7 @@ public:
         });
     }
 
+#if ENABLE_SERVER
     void sendAll()
     {
         printf("Sending ALL MQTT\n");
@@ -77,7 +77,7 @@ public:
         send(pData->led_ch3);
         send(pData->led_ch4);
     }
+#endif
 
     void send(ParameterData::Parameter& param) { sendLight(param.name, param.value); }
-
 };
