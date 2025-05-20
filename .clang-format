@@ -1,0 +1,36 @@
+BasedOnStyle: LLVM
+Language: Cpp
+Standard: c++20
+IndentWidth: 4
+AccessModifierOffset: -4
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+AllowShortBlocksOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakTemplateDeclarations: true
+BreakBeforeBraces: Allman
+ColumnLimit: 100
+CompactNamespaces: true
+FixNamespaceComments: true
+PointerAlignment: Left
+SpaceBeforeParens: ControlStatements
+SortIncludes: false
+
+# Argument list
+BinPackParameters: false
+BinPackArguments: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowAllArgumentsOnNextLine: false
+
+# Constructor initializer list
+BreakConstructorInitializers: BeforeComma
+BreakInheritanceList: BeforeColon
+ConstructorInitializerIndentWidth: 4
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+
+# Function call arguments
+ExperimentalAutoDetectBinPacking: false
