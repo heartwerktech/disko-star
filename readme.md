@@ -24,6 +24,11 @@ git clone --recurse-submodules https://github.com/heartwerktech/disko-star.git
 - Upload Filesystem Image 
 
 
+## FAQ / common problems
+- make sure to have high enough current supply, otherwise MCU resets.
+
+
+
 ## Resources
 
 - [Bill of Material](https://docs.google.com/spreadsheets/d/1WuYzduE2HkZthLLmO-JZaNuw8-il5M_H4LjsfEWBu10/edit?usp=sharing)
