@@ -11,9 +11,9 @@
 #endif
 
 #if ENABLE_SERVER
-#include "generic_server.h"
-extern GenericServer server;
-GenericData *pData = nullptr;
+#include "ServerLed.h"
+extern ServerLed server;
+DataLed *pData = nullptr;
 #endif
 
 #if ENABLE_MQTT

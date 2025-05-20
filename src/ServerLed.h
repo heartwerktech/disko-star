@@ -5,17 +5,17 @@
 
 #include "config.h"
 
-#include "generic_data.h"
+#include "DataLed.h"
 
 void webSocketEvent(byte num, WStype_t ws_type, uint8_t *payload, size_t length);
 
-class GenericServer : public ParameterServer
+class ServerLed : public ParameterServer
 {
 public:
-  GenericData data;
+  DataLed data;
 
 public:
-  GenericServer() : ParameterServer() { ParameterServer::pData = &data; }
+  ServerLed() : ParameterServer() { ParameterServer::pData = &data; }
   void setup()
   {
     ParameterServer::setup(DEVICE_NAME, webSocketEvent);
@@ -32,7 +32,7 @@ public:
   void loop() { ParameterServer::loop(); }
 };
 
-GenericServer server;
+ServerLed server;
 
 // the parameters of this callback function are always the same -> num: id of the client who send the event, ws_type: ws_type of message, payload: actual data sent and length: length of payload
 void webSocketEvent(byte num, WStype_t ws_type, uint8_t *payload, size_t length)

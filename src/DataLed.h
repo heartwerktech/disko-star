@@ -3,7 +3,7 @@
 #include "server/parameter_data.h"
 
 // ==============================
-class GenericData : public ParameterData
+class DataLed : public ParameterData
 {
 public:
 #define CREATE_PARAMETER(name, defaultValue) \

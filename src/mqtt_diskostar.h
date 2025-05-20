@@ -2,9 +2,9 @@
 
 #include "config.h"
 #include "interface/mqtt.h"
-#include "generic_data.h"
+#include "DataLed.h"
 
-#include "generic_server.h"
+#include "ServerLed.h"
 #include "motor/h_bridge_driver.h"
 #include "motor/stepper_driver.h"
 
@@ -34,8 +34,8 @@ public:
     }
 
     void setRXCallback(
-        GenericData *pData,
-        GenericServer &server,
+        DataLed *pData,
+        ServerLed &server,
         H_Bridge_Driver &motor,
         Stepper_Driver &stepper)
     {
@@ -129,7 +129,7 @@ public:
     }
 
     // helper bc only unipolar values for now.
-    void send_rotation(GenericData *pData)
+    void send_rotation(DataLed *pData)
     {
         float old_rotation = NAN;
 
